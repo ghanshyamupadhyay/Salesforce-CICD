@@ -18,7 +18,7 @@ node {
     println SFDC_HOST
     println CONNECTED_APP_CONSUMER_KEY
     
-    def toolbelt = tool 'toolbelt'
+    def toolbelt = tool 'sfdx'
 
     stage('checkout source code ') {
         checkout scm
