@@ -27,11 +27,11 @@ node {
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Run Local Test Classes') {
             if (isUnix()) {
-                testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
+                testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             } else {
-                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
+                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             }
-            println('testStatus --' +testStatus);
+            /*println('testStatus --' +testStatus);
             
             if (isUnix()) {
                 testReport = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
@@ -40,9 +40,9 @@ node {
                 testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
             }
             
-            println('testReport --' +testReport)
+            println('testReport --' +testReport)*/
             
-            /*def statusList = testStatus.split('json')            
+            def statusList = testStatus.split('json')            
             def jsonSlurper = new JsonSlurperClassic()
             def robj = jsonSlurper.parseText(statusList[1])
             def testRunId = robj.result.testRunId
@@ -51,13 +51,13 @@ node {
             println('testRunId --' +testRunId);
             
             if (isUnix()) {
-                testReport = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
+                testReport = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i ${testRunId} -u ghanshyam@learnsfdc.com"
                 
             } else {
-                testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
+                testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i ${testRunId} -u ghanshyam@learnsfdc.com"
             }
             
-            println('testReport --' +testReport);*/
+            println('testReport --' +testReport)
 
         }
     }
