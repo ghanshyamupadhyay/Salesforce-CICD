@@ -29,18 +29,15 @@ node {
             if (isUnix()) {
                 testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             } else {
-                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
+                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             }
             
-            println('testStatus');
-            println(testStatus);
-            if (testStatus.status != 0) {
-                println('testStatus 0');
-                println(testStatus.result)
-            }else{
-                println('testStatus 1');
-                println(testStatus.result)
-            }
+            def jsonSlurper = new JsonSlurperClassic()
+            def robj = jsonSlurper.parseText(testStatus)
+            
+            
+            println('robj');
+            println(robj);
         }
     }
 }
