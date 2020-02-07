@@ -29,9 +29,10 @@ node {
             if (isUnix()) {
                 testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             } else {
-                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
+                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             }
             println(testStatus)
+            println(testStatus.result.testRunId)
         }
     }
 }
