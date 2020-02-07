@@ -38,7 +38,10 @@ node {
             def robj = jsonSlurper.parseText(statusList[1])
             
             
-            println('robj');
+            println('robj --' +robj);
+            println('robj.status --' +robj.status);
+            println('robj.result --' +robj.result);
+            println('robj.result.testRunId --' +robj.result.testRunId);
             /*if (robj.status != 0) {
                 println('rObj 0');
                 println(robj.result)
