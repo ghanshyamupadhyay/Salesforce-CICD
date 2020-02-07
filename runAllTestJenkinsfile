@@ -31,8 +31,8 @@ node {
             } else {
                 testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             }
-            
-            println('testStatus --' +testStatus)
+            def statusList = testStatus.split('json')
+            println('testStatus --' +statusList[1])
             
             //def jsonSlurper = new JsonSlurperClassic()
             //def robj = jsonSlurper.parseText(testStatus)
