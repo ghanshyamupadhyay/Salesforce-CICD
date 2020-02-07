@@ -34,11 +34,11 @@ node {
             
             println(testStatus)
             
-            /*def jsonSlurper = new JsonSlurperClassic()
+            def jsonSlurper = new JsonSlurperClassic()
             def robj = jsonSlurper.parseText(testStatus)
             
             
-            println('robj');
+            /*println('robj');
             if (robj.status != 0) {
                 println('rObj 0');
                 println(robj.result)
