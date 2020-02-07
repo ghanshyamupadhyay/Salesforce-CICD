@@ -51,10 +51,10 @@ node {
             println('testRunId --' +testRunId)
             
             if (isUnix()) {
-                testReport = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i ${testRunId} -u ghanshyam@learnsfdc.com"
+                testReport = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
                 
             } else {
-                testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i ${testRunId} -u ghanshyam@learnsfdc.com"
+                testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
             }
             
             println('testReport --' +testReport)
