@@ -8,10 +8,13 @@ node {
     def SFDC_USERNAME
 
     //def HUB_ORG = env.HUB_ORG_DH
-    def HUB_ORG = "${params.P_HUB_ORG}"
-    def SFDC_HOST = env.SFDC_HOST_DH
+    //def SFDC_HOST = env.SFDC_HOST_DH
     def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
-    def CONNECTED_APP_CONSUMER_KEY = env.CONNECTED_APP_CONSUMER_KEY_DH
+    //def CONNECTED_APP_CONSUMER_KEY = env.CONNECTED_APP_CONSUMER_KEY_DH
+    
+    def HUB_ORG = "${params.USER_NAME}"
+    def SFDC_HOST = "${params.INSTANCE}"
+    def CONNECTED_APP_CONSUMER_KEY = "${params.CONSUMER_KEY}"
 
     println 'KEY IS'
     println JWT_KEY_CRED_ID
