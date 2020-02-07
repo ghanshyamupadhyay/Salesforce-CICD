@@ -3,13 +3,6 @@
     <aura:attribute name="record" type="Object"/>
     <aura:attribute name="recordError" type="String"/>
 
-    <force:recordPreview aura:id="recordLoader"
-      recordId="{!v.recordId}"
-      layoutType="FULL"
-      targetRecord="{!v.record}"
-      targetError="{!v.recordError}"
-      />
-
     <!-- Display a header with details about the record -->
     <div class="slds-page-header" role="banner">
         <p class="slds-text-heading--label">{!v.record.Name}</p>
