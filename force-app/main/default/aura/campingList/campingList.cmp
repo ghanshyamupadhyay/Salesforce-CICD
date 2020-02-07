@@ -7,7 +7,7 @@
     
 
     
-    <aura:attribute name="items" type="Camping_Item__c[]"/>
+    <aura:attribute name="CampingItems" type="Camping_Item__c[]"/>
 
     
        <!-- NEW ITEM FORM -->
