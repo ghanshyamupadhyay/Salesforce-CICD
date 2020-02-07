@@ -34,7 +34,7 @@ node {
             
             printf testStatus
             
-            def jsonSlurper = new JsonSlurperClassic()
+            /*def jsonSlurper = new JsonSlurperClassic()
             def robj = jsonSlurper.parseText(testStatus)
             
             
@@ -45,7 +45,7 @@ node {
             }else{
                 println('rObj 1');
                 println(robj.result)
-            }
+            }*/
         }
     }
 }
