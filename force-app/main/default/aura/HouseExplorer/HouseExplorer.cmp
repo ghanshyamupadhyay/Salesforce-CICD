@@ -1,0 +1,9 @@
+<aura:component >
+
+    <div>
+        <c:HouseSearchBar />
+        <c:HousePriceSlider />
+        <c:HouseList />
+    </div>
+    
+</aura:component>

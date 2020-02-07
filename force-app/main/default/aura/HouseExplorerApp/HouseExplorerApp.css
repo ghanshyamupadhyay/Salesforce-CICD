@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Yanone Kaffeesatz';
+    src: url('/resource/realtyapp/fonts/YanoneKaffeesatz-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/resource/realtyapp/fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 300;
+    src: url('/resource/realtyapp/fonts/OpenSans-Light.ttf');
+}
+
+.THIS {
+	font-family: "Open Sans";
+}
+
+.THIS.header {
+    background: #039DDB;
+    border: none;
+    font-family: 'Yanone Kaffeesatz', 'Open Sans', sans-serif;
+    font-size: 32px;
+    padding: 8px 20px 14px 20px;
+    color: #ffffff;
+}
+
+.THIS img {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    height: 32px;
+}

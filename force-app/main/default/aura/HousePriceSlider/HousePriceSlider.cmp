@@ -1,0 +1,11 @@
+<aura:component >
+	
+    <ltng:require styles="/resource/realtyapp/js/jquery.nouislider.min.css"	
+                  scripts="/resource/realtyapp/js/jquery.js,/resource/realtyapp/js/jquery.nouislider.all.min.js"
+		afterScriptsLoaded="{!c.doInit}"/>
+    
+    <div>
+		<div id="slider"></div>
+    </div>
+
+</aura:component>

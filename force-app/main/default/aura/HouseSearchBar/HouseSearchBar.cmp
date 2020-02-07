@@ -1,0 +1,13 @@
+<aura:component >
+
+    <aura:attribute name="searchKey" type="String"/>
+    
+    <div>
+        <div class="wrapper">
+            <ui:inputText class="searchKey" keyup="{!c.searchKeyChange}" value="{!v.searchKey}"
+                    placeholder="Search..."/>
+            <button class="btn btn-link" onclick="{!c.clearText}">X</button>
+        </div>
+    </div>
+
+</aura:component>

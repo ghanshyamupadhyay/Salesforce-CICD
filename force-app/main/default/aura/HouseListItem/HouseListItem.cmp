@@ -1,0 +1,16 @@
+<aura:component >
+	
+    <aura:attribute name="house" type="House__c"/>
+    
+	<a href="{! '/' + v.house.Id}">
+    <div style="{! 'background-image:url(' + v.house.Default_Picture_URL__c + ')'}">
+        <div>
+            <h1>{!v.house.Title__c}</h1>
+            <div>{!v.house.City__c}&nbsp;&nbsp;&nbsp;{!v.house.Size__c} sqft</div>
+            <div>Beds: {!v.house.Bedrooms__c}&nbsp;&nbsp;&nbsp;Baths: {!v.house.Bathrooms__c}</div>
+            <div class="price">${! v.house.Price__c}</div>
+        </div>
+    </div>
+	</a>    
+    
+</aura:component>
