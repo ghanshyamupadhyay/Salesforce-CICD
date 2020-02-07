@@ -34,12 +34,12 @@ node {
             def statusList = testStatus.split('json')
             println('testStatus --' +statusList[1])
             
-            //def jsonSlurper = new JsonSlurperClassic()
-            //def robj = jsonSlurper.parseText(testStatus)
+            def jsonSlurper = new JsonSlurperClassic()
+            def robj = jsonSlurper.parseText(statusList[1])
             
             
-            /*println('robj');
-            if (robj.status != 0) {
+            println('robj');
+            /*if (robj.status != 0) {
                 println('rObj 0');
                 println(robj.result)
             }else{
