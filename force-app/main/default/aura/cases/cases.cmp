@@ -1,0 +1,7 @@
+<aura:component controller="caseController">
+    <aura:attribute name="cases" type="Case[]"/>
+    <aura:attribute name="offset" type="integer"/>
+    <aura:attribute name="next" type="boolean"/>
+    <aura:attribute name="prev" type="boolean"/>
+	
+</aura:component>

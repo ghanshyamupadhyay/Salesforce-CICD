@@ -1,0 +1,40 @@
+.THIS > div {
+    position:relative;
+    display: inline-block;
+    margin: .2rem;
+    border: solid 1px #dddddd;
+    border-radius: .2rem;
+    padding: 1rem;
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+	font-size: 0.9rem;
+    color: #EEEEEE;
+}
+
+.THIS > div > div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, .4);
+    padding: 8px;
+}
+
+.THIS > div > div > div {
+	padding: 2px 0;
+    font-weight: 300;
+}
+
+.THIS h1 {
+    font-size: 1.1rem;
+    padding-bottom: 2px;
+}
+
+.THIS .price {
+    width: 100%;
+    font-weight: 500 !important;
+}

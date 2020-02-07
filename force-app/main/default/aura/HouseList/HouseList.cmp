@@ -1,0 +1,26 @@
+<aura:component controller="HouseController">
+
+    <aura:attribute name="houses" type="House__c[]"/>
+    <aura:attribute name="page" type="integer"/>
+    <aura:attribute name="pages" type="integer"/>
+    <aura:attribute name="total" type="integer"/>
+
+    <aura:attribute name="searchKey" type="String" default=""/>
+    <aura:attribute name="minPrice" type="integer" default="0"/>
+    <aura:attribute name="maxPrice" type="integer" default="10000000"/>
+    
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:HousePageChange" action="{!c.pageChange}"/>
+    <aura:handler event="c:HouseSearchKeyChange" action="{!c.searchKeyChange}"/>
+    <aura:handler event="c:HousePriceSelectionChange" action="{!c.priceSelectionChange}"/>
+    
+    <div>
+	    <c:HousePaginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+        <div class="list">
+            <aura:iteration items="{!v.houses}" var="house">
+                <c:HouseListItem house="{!house}"/>
+            </aura:iteration>
+        </div>
+    </div>
+    
+</aura:component>

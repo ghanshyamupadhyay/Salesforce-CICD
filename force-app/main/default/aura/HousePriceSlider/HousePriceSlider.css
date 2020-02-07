@@ -1,0 +1,28 @@
+.THIS {
+    text-align: center;
+    padding: 20px 0 8px 0;
+}
+
+.THIS #slider {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.THIS .noUi-connect {
+    background: #4EB1CB;
+}
+
+.THIS .tooltip {
+    font-size: .8rem;
+    font-weight: 300;
+    border-radius: 2px;
+    display: block;
+    opacity: .9;
+    color: #fff;
+    background: #4EB1CB;
+    padding: 3px 4px;
+    margin-top: -21px;
+    width:47px;
+    text-align: center;
+    margin-left: -6px;
+}
