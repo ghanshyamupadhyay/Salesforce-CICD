@@ -29,13 +29,12 @@ node {
             if (isUnix()) {
                 testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             } else {
-                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
+                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             }
             println(testStatus)
             //println(testStatus.result.testRunId)
-
-            def jsonSlurper = new JsonSlurperClassic()
-            def robj = jsonSlurper.parseText(testStatus.toString())
+            
+            def robj = testStatus
             println('rObj');
             println(robj);
             if (robj.status != 0) {
