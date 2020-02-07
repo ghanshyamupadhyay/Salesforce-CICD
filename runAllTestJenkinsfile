@@ -31,9 +31,20 @@ node {
             } else {
                 testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             }
-            println('testStatus')
             println(testStatus)
             //println(testStatus.result.testRunId)
+
+            def jsonSlurper = new JsonSlurperClassic()
+            def robj = jsonSlurper.parseText(testStatus.toString())
+            println('rObj');
+            println(robj);
+            if (robj.status != 0) {
+                println('rObj 0');
+                println(robj.result)
+            }else{
+                println('rObj 1');
+                println(robj.result)
+            }
         }
     }
 }
