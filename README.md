@@ -1,4 +1,4 @@
-# yeurdreamin-adventure
+# CICD-DEMO
 How to use Salesforce DX with Jenkins to implement Continuous deployment and Continuous Integration.
 # Scope: - 
 Scope of the document is to provide the step by step solution to implement the SFDX with jenkins Server so that project can take the advantage of SFDX continuous delivery and development capabilities including the source control management.
@@ -17,9 +17,9 @@ Scope of the document is to provide the step by step solution to implement the S
 # Download and install the OpenSSL in your Machine: - 
 Visit this [Link](https://sourceforge.net/projects/openssl/) and download the OpenSSL. After downloading install the software in your machine. Note: - OpenSSL is required to install so that we can generate the required certificate.
 Configure the path: - Once you are done with the installation part from the above run the below command form Command prompt 
-# set OPENSSL_CONF=C:\openssl\share\openssl.cnf
+``` set OPENSSL_CONF=C:\openssl\share\openssl.cnf```
 Where OPENSSL_CONF is name of the path
-# C:\openssl\share\openssl.cnf is the path of the OpenSSL folder be sure that you are using the correct Path
+```C:\openssl\share\openssl.cnf is the path of the OpenSSL folder be sure that you are using the correct Path```
 Now, run `openssl version` command.
 
 While setting the environment variable use `OPENSSL_CONF` as variable name and the path of SSL directory as Variable Value.
@@ -56,6 +56,14 @@ Once we have generated the certificate file, time to generate the certificate fi
 10. Go ahead and save the application
 11. Scroll down and Click on ```“Manage Profiles”``` and then select the appropriate profiles. So that the users with selected profiles can took the advantage of connected app.
 12. Now, go back to the connected application and copy the Consumer Key. Paste is somewhere we will use this while testing the flow.
+
+![](https://github.com/amitastreait/yeurdreamin-adventure/blob/master/Screenshot%202019-04-14%20at%205.15.41%20PM.png)
+
+![](https://github.com/amitastreait/yeurdreamin-adventure/blob/master/Screenshot%202019-04-14%20at%205.17.00%20PM.png)
+
+![](https://github.com/amitastreait/yeurdreamin-adventure/blob/master/Screenshot%202019-04-14%20at%205.17.33%20PM.png)
+
+
 Now time to test the Validate whatever we did till now run the below command from command prompt  
 
 `sfdx force:auth:jwt:grant --clientid {ADD_YOUR_CLIENT_ID} --jwtkeyfile {ABSOLUTE_PATH_TO_YOUR_SERVER.KEY_FILE} --username {ADD_YOUR_USERNAME} --instanceurl https://login.salesforce.com`
@@ -90,11 +98,13 @@ sfdx force:data:tree:import --plan ./data/data-plan.json
 # Resources: - 
 [Salesforce Doc](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ci_jenkins.htm)
 
-[Apex Hours](http://amitsalesforce.blogspot.com/2019/01/continuous-integration-using-jenkins-with-salesforceDx.html)
+[Apex Hours Article](http://amitsalesforce.blogspot.com/2019/01/continuous-integration-using-jenkins-with-salesforceDx.html)
 
-[Open SSL](https://sourceforge.net/projects/openssl/)
+[Download Open SSL](https://sourceforge.net/projects/openssl/)
 
-[JenkinsFile](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ci_jenkins_sample_walkthrough.htm)
+[Jenkins WalkThrough](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ci_jenkins_sample_walkthrough.htm)
+
+[Jenkins File Sample](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ci_jenkins_code.htm)
 
 [ConnectedApp](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_connected_app.htm)
 

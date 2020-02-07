@@ -78,10 +78,10 @@
         {
             "sourcePath": "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/classes/YeurContactController.cls",
             "isDirectory": false,
-            "size": 1063,
-            "modifiedTime": 1555233756099,
-            "changeTime": 1555233756099,
-            "contentHash": "75d1711dcc6aece67641f5551e4a74291d85db06",
+            "size": 1467,
+            "modifiedTime": 1555243780236,
+            "changeTime": 1555243780236,
+            "contentHash": "6fb62ebbb32b89e934b10f828c27933730f1151d",
             "isMetadataFile": false,
             "state": "u",
             "isWorkspace": false
@@ -107,10 +107,10 @@
         {
             "sourcePath": "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc",
             "isDirectory": true,
-            "size": 256,
-            "modifiedTime": 1555233315455,
-            "changeTime": 1555233315455,
-            "contentHash": "1283ab53a04b9ba59fdf4593feb11f6747ea9283",
+            "size": 288,
+            "modifiedTime": 1555242868762,
+            "changeTime": 1555242868762,
+            "contentHash": "852cc4fb27cc301860893d1f13778b24edff0460",
             "isMetadataFile": false,
             "state": "u",
             "isWorkspace": false
@@ -150,10 +150,10 @@
         {
             "sourcePath": "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeurcontactlist/yeurcontactlist.html",
             "isDirectory": false,
-            "size": 4983,
-            "modifiedTime": 1555233552342,
-            "changeTime": 1555233552342,
-            "contentHash": "9d94f3c2192623389a85de4c8acfeccdb5f65f3e",
+            "size": 4755,
+            "modifiedTime": 1555241763720,
+            "changeTime": 1555241763720,
+            "contentHash": "16f97ddaf0ab305bcea1d1309cec4048c37879e1",
             "isMetadataFile": false,
             "state": "u",
             "isWorkspace": false
@@ -162,15 +162,15 @@
     [
         "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeurcontactlist/yeurcontactlist.js",
         {
-            "state": "u",
             "sourcePath": "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeurcontactlist/yeurcontactlist.js",
             "isDirectory": false,
-            "isMetadataFile": false,
             "size": 1851,
             "modifiedTime": 1555234027992,
             "changeTime": 1555234027992,
-            "isWorkspace": false,
-            "contentHash": "4f7bfb6d6bc2cec61c597d5c9ffef2932b9b38cd"
+            "contentHash": "4f7bfb6d6bc2cec61c597d5c9ffef2932b9b38cd",
+            "isMetadataFile": false,
+            "state": "u",
+            "isWorkspace": false
         }
     ],
     [
@@ -413,14 +413,13 @@
         {
             "sourcePath": "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure",
             "isDirectory": true,
-            "size": 480,
-            "modifiedTime": 1555223633470,
-            "changeTime": 1555223633470,
-            "contentHash": "2df2f3ab751a924559c8fed3dfda3ff0c3baae9d",
+            "size": 608,
+            "modifiedTime": 1555242675050,
+            "changeTime": 1555242675050,
+            "contentHash": "c03db36168fe4bf1ff37ba382e772662490e7e5e",
             "isMetadataFile": false,
             "state": "u",
-            "isWorkspace": true,
-            "isArtifactRoot": false
+            "isWorkspace": true
         }
     ],
     [
@@ -523,6 +522,58 @@
             "modifiedTime": 1555233315459,
             "changeTime": 1555233315459,
             "contentHash": "aca0b783dba84280e7e3f7dfb13712f80f1ebc0b",
+            "isMetadataFile": true,
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeuraccountcontacts",
+        {
+            "sourcePath": "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeuraccountcontacts",
+            "isDirectory": true,
+            "size": 160,
+            "modifiedTime": 1555242868766,
+            "changeTime": 1555242868766,
+            "contentHash": "d95f7400f734b577e70d031b102f35b3c400ca36",
+            "isMetadataFile": false,
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeuraccountcontacts/yeuraccountcontacts.html",
+        {
+            "sourcePath": "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeuraccountcontacts/yeuraccountcontacts.html",
+            "isDirectory": false,
+            "size": 507,
+            "modifiedTime": 1555243592665,
+            "changeTime": 1555243592665,
+            "contentHash": "483275a32e1f2bb14ff50f08dd9a1904f300d6f9",
+            "isMetadataFile": false,
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeuraccountcontacts/yeuraccountcontacts.js",
+        {
+            "state": "u",
+            "sourcePath": "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeuraccountcontacts/yeuraccountcontacts.js",
+            "isDirectory": false,
+            "isMetadataFile": false,
+            "size": 1045,
+            "modifiedTime": 1555245699967,
+            "changeTime": 1555245699967,
+            "contentHash": "549d678fa3c752972df6b9f47af639a6f5302ce1"
+        }
+    ],
+    [
+        "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeuraccountcontacts/yeuraccountcontacts.js-meta.xml",
+        {
+            "sourcePath": "/Users/amitsingh/Documents/LWC Projects/yeurdreamin-adventure/force-app/main/default/lwc/yeuraccountcontacts/yeuraccountcontacts.js-meta.xml",
+            "isDirectory": false,
+            "size": 441,
+            "modifiedTime": 1555242900088,
+            "changeTime": 1555242900088,
+            "contentHash": "9691714e7bb370f1ee4d2e2ed34d9c712d16b6d5",
             "isMetadataFile": true,
             "state": "u"
         }
