@@ -31,24 +31,22 @@ node {
             } else {
                 testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             }
-            def statusList = testStatus.split('json')
-            println('testStatus --' +statusList[1])
-            
+            def statusList = testStatus.split('json')            
             def jsonSlurper = new JsonSlurperClassic()
             def robj = jsonSlurper.parseText(statusList[1])
+            def testRunId = robj.result.testRunId
             
             
-            println('robj --' +robj);
-            println('robj.status --' +robj.status);
-            println('robj.result --' +robj.result);
-            println('robj.result.testRunId --' +robj.result.testRunId);
-            /*if (robj.status != 0) {
-                println('rObj 0');
-                println(robj.result)
-            }else{
-                println('rObj 1');
-                println(robj.result)
-            }*/
+            println('testRunId --' +testRunId);
+            
+            if (isUnix()) {
+                testReport = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i ${testRunId} -c --json"
+            } else {
+                testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i ${testRunId} -c --json"
+            }
+            
+            println('testReport --' +testReport);
+
         }
     }
 }
