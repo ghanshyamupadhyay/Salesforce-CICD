@@ -175,5 +175,13 @@ node {
             }
             println(openorg)
         }
+        post {
+            always {
+                rc = sh returnStatus: true, script: "sfdx force:auth:logout -u ${HUB_ORG} -p"
+                if (rc != 0) {
+                        error 'Unable to log out of Production Org'
+                    }               
+            }
+        }
     }
 }
