@@ -31,7 +31,7 @@ node {
     }
 
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
-        stage('Create Scratch Org') {
+        stage('Authorize ORG') {
             if (isUnix()) {
                 rc = sh returnStatus: true, script: "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} -d --instanceurl ${SFDC_HOST}"
             } else {
@@ -43,14 +43,6 @@ node {
             }
         }
         stage('Run Local Test Classes') {
-            
-            /*if (isUnix()) {
-                testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
-            } else {
-                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
-            }
-            println('testStatus --' +testStatus)
-            //sfdx force:apex:test:report -i 7070I0000CfMqFE -u ghanshyam@learnsfdc.com*/
             
             if (isUnix()) {
                 testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
@@ -64,17 +56,9 @@ node {
             def robj = jsonSlurper.parseText(statusList[1])
             def testRunId = robj.result.testRunId
             
-            
-            println('testRunId --' +testRunId)
-            scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +testRunId+ " -u ${HUB_ORG}"
-            //def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
-            println('scriptToRunForTestResult stage 2--' +scriptToRunForTestResult)
-            
-
+            scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +testRunId+ " -u ${HUB_ORG} --json"
         }
         stage('Test Class Report') {
-            
-            println('scriptToRunForTestResult stage 3--' +scriptToRunForTestResult)
             
             if (isUnix()) {
                 testReport = sh returnStdout: true, script: "${scriptToRunForTestResult}"
