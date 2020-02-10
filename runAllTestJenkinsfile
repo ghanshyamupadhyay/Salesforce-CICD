@@ -54,15 +54,17 @@ node {
             
             
             println('testRunId --' +testRunId)
+            def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i" +testRunId+ " -u ${HUB_ORG}"
+            println('scriptToRunForTestResult --' +scriptToRunForTestResult)
             
             if (isUnix()) {
-                testReport = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
+                //testReport = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
                 
             } else {
-                testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
+                //testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
             }
             
-            println('testReport --' +testReport)
+            //println('testReport --' +testReport)
 
         }
     }
