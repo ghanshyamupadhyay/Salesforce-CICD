@@ -67,7 +67,7 @@ node {
             
             println('testReport --' +testReport)*/
             
-            def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
+            scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
             println('scriptToRunForTestResult --' +scriptToRunForTestResult)
             
             if (isUnix()) {
