@@ -86,7 +86,7 @@ node {
             
             
             if (sourcepush != 0) {
-                error 'push failed'
+                //error 'push failed'
             }
         }
         /*stage('Import Data to test ORG') {
