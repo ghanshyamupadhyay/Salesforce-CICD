@@ -41,9 +41,9 @@ node {
             //sfdx force:apex:test:report -i 7070I0000CfMqFE -u ghanshyam@learnsfdc.com*/
             
             if (isUnix()) {
-                testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
+                testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             } else {
-                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
+                testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             }
             
             
@@ -54,7 +54,8 @@ node {
             
             
             println('testRunId --' +testRunId)
-            def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +testRunId+ " -u ${HUB_ORG}"
+            //def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +testRunId+ " -u ${HUB_ORG}"
+            def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
             println('scriptToRunForTestResult --' +scriptToRunForTestResult)
             
             if (isUnix()) {
