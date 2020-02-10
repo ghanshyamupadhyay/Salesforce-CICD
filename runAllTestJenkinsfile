@@ -24,6 +24,7 @@ node {
     println ('CONNECTED_APP_CONSUMER_KEY --' +CONNECTED_APP_CONSUMER_KEY)
     
     def toolbelt = tool 'toolbelt'
+    def scriptToRunForTestResult
 
     stage('checkout source code ') {
         checkout scm
@@ -32,15 +33,15 @@ node {
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Run Local Test Classes') {
             
-            if (isUnix()) {
+            /*if (isUnix()) {
                 testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             } else {
                 testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             }
             println('testStatus --' +testStatus)
-            //sfdx force:apex:test:report -i 7070I0000CfMqFE -u ghanshyam@learnsfdc.com
+            //sfdx force:apex:test:report -i 7070I0000CfMqFE -u ghanshyam@learnsfdc.com*/
             
-            /*if (isUnix()) {
+            if (isUnix()) {
                 testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             } else {
                 testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
@@ -54,21 +55,15 @@ node {
             
             
             println('testRunId --' +testRunId)
-            //def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +testRunId+ " -u ${HUB_ORG}"
-            def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
-            println('scriptToRunForTestResult --' +scriptToRunForTestResult)
+            scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +testRunId+ " -u ${HUB_ORG}"
+            //def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
+            println('scriptToRunForTestResult stage 2--' +scriptToRunForTestResult)
             
-            if (isUnix()) {
-                testReport = sh returnStdout: true, script: "${scriptToRunForTestResult}"
-                
-            } else {
-                testReport = bat returnStdout: true, script: "${scriptToRunForTestResult}"
-            }
+
+        }
+        stage('Test Class Report') {
             
-            println('testReport --' +testReport)*/
-            
-            scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
-            println('scriptToRunForTestResult --' +scriptToRunForTestResult)
+            println('scriptToRunForTestResult stage 3--' +scriptToRunForTestResult)
             
             if (isUnix()) {
                 testReport = sh returnStdout: true, script: "${scriptToRunForTestResult}"
@@ -80,19 +75,5 @@ node {
             println('testReport --' +testReport)
 
         }
-        /*stage('Test Class Report') {
-            def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
-            println('scriptToRunForTestResult --' +scriptToRunForTestResult)
-            
-            if (isUnix()) {
-                testReport = sh returnStdout: true, script: "${scriptToRunForTestResult}"
-                
-            } else {
-                testReport = bat returnStdout: true, script: "${scriptToRunForTestResult}"
-            }
-            
-            println('testReport --' +testReport)
-
-        }*/
     }
 }
