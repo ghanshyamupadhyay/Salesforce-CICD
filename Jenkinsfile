@@ -83,11 +83,6 @@ node {
             }
             println('Updated Deployment Status')
             println(statusDep1)
-            
-            
-            if (sourcepush != 0) {
-                //error 'push failed'
-            }
         }
         /*stage('Import Data to test ORG') {
             if (isUnix()) {
