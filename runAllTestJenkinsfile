@@ -32,29 +32,20 @@ node {
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Run Local Test Classes') {
             
-            if (isUnix()) {
+            /*if (isUnix()) {
                 testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             } else {
                 testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             }
             println('testStatus --' +testStatus)
+            //sfdx force:apex:test:report -i 7070I0000CfMqFE -u ghanshyam@learnsfdc.com*/
             
-            
-            /*if (isUnix()) {
+            if (isUnix()) {
                 testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             } else {
                 testStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             }
             
-            
-            if (isUnix()) {
-                testReport = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
-                
-            } else {
-                testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
-            }
-            
-            println('testReport --' +testReport)
             
             def statusList = testStatus.split('json')            
             def jsonSlurper = new JsonSlurperClassic()
@@ -71,7 +62,7 @@ node {
                 testReport = bat returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:report -i 7070I0000CePtkr -u ghanshyam@learnsfdc.com"
             }
             
-            println('testReport --' +testReport)*/
+            println('testReport --' +testReport)
 
         }
     }
