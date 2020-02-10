@@ -66,9 +66,7 @@ node {
             }
             
             println('testReport --' +testReport)*/
-
-        }
-        stage('Test Class Report') {
+            
             def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
             println('scriptToRunForTestResult --' +scriptToRunForTestResult)
             
@@ -82,5 +80,19 @@ node {
             println('testReport --' +testReport)
 
         }
+        /*stage('Test Class Report') {
+            def scriptToRunForTestResult = "${toolbelt}/sfdx force:apex:test:report -i " +"7070I0000CfMqFE"+ " -u ${HUB_ORG}"
+            println('scriptToRunForTestResult --' +scriptToRunForTestResult)
+            
+            if (isUnix()) {
+                testReport = sh returnStdout: true, script: "${scriptToRunForTestResult}"
+                
+            } else {
+                testReport = bat returnStdout: true, script: "${scriptToRunForTestResult}"
+            }
+            
+            println('testReport --' +testReport)
+
+        }*/
     }
 }
