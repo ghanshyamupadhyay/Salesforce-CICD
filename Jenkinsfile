@@ -30,14 +30,14 @@ node {
     }
 
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
-        stage('Log out') {
+        /*stage('Log out') {
             always {
                 rc = sh returnStatus: true, script: "sfdx force:auth:logout -u ${HUB_ORG} -p"
                 if (rc != 0) {
                         error 'Unable to log out of target Org'
                     }               
             }
-        }
+        }*/
         stage('Create Scratch Org') {
             if (isUnix()) {
                 rc = sh returnStatus: true, script: "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} -d --instanceurl ${SFDC_HOST}"
@@ -167,7 +167,7 @@ node {
                 println(dataimport)
             }
         }
-        stage('Run Local Test Classes') {
+        /*stage('Run Local Test Classes') {
             if (isUnix()) {
                 testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             } else {
@@ -190,6 +190,6 @@ node {
                         error 'Unable to log out of Production Org'
                     }               
             }
-        }
+        }*/
     }
 }
