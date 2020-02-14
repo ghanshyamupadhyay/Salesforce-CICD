@@ -60,7 +60,7 @@ node {
             
             Boolean isDeployProcessDone = false;
             String deploySuccessful = '"status": "Succeeded"';
-            String deployUnsuccessful = '"success": false';
+            String deployUnsuccessful = '"status":"Failed"';
             
             String deployQueuedString = 'Status:  Queued';
             while(deploymentStatus.contains(deployQueuedString)){
@@ -79,7 +79,7 @@ node {
                 if (deploymentStatus.contains(deploySuccessful)){
                     println('Deployment Succeeded');
                     isDeployProcessDone = true;
-                } else if (deployUnsuccessful.contains(deployUnsuccessful)){
+                } else if (deploymentStatus.contains(deployUnsuccessful)){
                     println('Deployment Did Not Succeed');
                     println(deploymentStatus);
                     isDeployProcessDone = true;
