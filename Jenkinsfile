@@ -19,6 +19,7 @@ node {
     
     def toolbelt = tool 'toolbelt'
     def deploymentStatusCmd = "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+    def deploymentStatus = 'Queued'
 
     stage('checkout source code ') {
         checkout scm
@@ -55,26 +56,23 @@ node {
             }else{
                 println(' Deploy the code into Scratch ORG.')
                 sourcepush = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
-            }
-            //println(sourcepush)
+            }            
             
-            def deploymentStatus = 'Queued'
-            while(deploymentStatus == 'Queued' || deploymentStatus == 'InProgress'){
+            while(${deploymentStatus} == 'Queued' || ${deploymentStatus} == 'InProgress'){
                 println('Checking Deployment Status');
                 if(isUnix()){
                     statusDep = sh returnStdout: true, script: "${deploymentStatusCmd}"
                 }else{
                     statusDep = bat returnStdout: true, script: "${deploymentStatusCmd}"
                 }
-                println('Deployment Status-- ' +statusDep)
             
                 def statusList = statusDep.split('json')    
                 def jsonSlurper = new JsonSlurperClassic()
                 def robj = jsonSlurper.parseText(statusList[1])
-                println('robj-- ' +robj)
-                println('robj-- ' +robj.result.status)
+                println('Deployment Status -- ' +robj.result.status)
+                
                 deploymentStatus = robj.result.status
-                if(deploymentStatus == 'Queued' || deploymentStatus == 'InProgress'){
+                if(${deploymentStatus} == 'Queued' || ${deploymentStatus} == 'InProgress'){
                     sleep 60
                 }
             }
