@@ -11,15 +11,12 @@ node {
     def JWT_KEY_CRED_ID = "${params.OPENSSL_KEY}"
     def CONNECTED_APP_CONSUMER_KEY = "${params.CONSUMER_KEY}"
 
-    println 'KEY IS'
     println ('JWT_KEY_CRED_ID --' +JWT_KEY_CRED_ID)
     println ('HUB_ORG --' +HUB_ORG)
     println ('SFDC_HOST --' +SFDC_HOST)
     println ('CONNECTED_APP_CONSUMER_KEY --' +CONNECTED_APP_CONSUMER_KEY)
     
-    def toolbelt = tool 'toolbelt'
-    def deploymentStatusCmd = ""
-    
+    def toolbelt = tool 'toolbelt'    
 
     stage('checkout source code ') {
         checkout scm
