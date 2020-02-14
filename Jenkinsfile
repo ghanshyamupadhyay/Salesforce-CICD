@@ -57,20 +57,26 @@ node {
             }
             //println(sourcepush)
             
-            if(isUnix()){
+            def deploymentStatus = 'Queued'
+            while(deploymentStatus == 'Queued'){
                 println('Checking Deployment Status');
-                statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-            }else{
-                println('Checking Deployment Status');
-                statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-            }
-            println('Deployment Status-- ' +statusDep)
+                if(isUnix()){
+                    statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                }else{
+                    statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                }
+                println('Deployment Status-- ' +statusDep)
             
-            def statusList = statusDep.split('json')    
-            println('statusList-- ' +statusList)
-            def jsonSlurper = new JsonSlurperClassic()
-            def robj = jsonSlurper.parseText(statusList[1])
-            println('robj-- ' +robj)
+                def statusList = statusDep.split('json')    
+                def jsonSlurper = new JsonSlurperClassic()
+                def robj = jsonSlurper.parseText(statusList[1])
+                println('robj-- ' +robj)
+                deploymentStatus = robj.result.succes
+                if(deploymentStatus == 'Queued'){
+                    println('Waiting For 60 Seconds')
+                    sleep 60
+                }
+            }
             
             /*if(isUnix()){
                 println('Waiting For 60 Seconds')
