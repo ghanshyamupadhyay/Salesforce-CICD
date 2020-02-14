@@ -58,35 +58,29 @@ node {
                 sourcepush = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }            
             
-            def deploymentStatus = 'Pending'
-            while(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
-                /*if(isUnix()){
-                    statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-                }else{
-                    statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-                }
+            Boolean isDeployProcessDone = false;
+            String deploySuccessful = '"status": "Succeeded"';
+            String deployUnsuccessful = '"success": false';
             
-                def statusList = statusDep.split('json')
-                def jsonSlurper = new JsonSlurperClassic()
-                def robj = jsonSlurper.parseText(statusList[1])
-                println('Deployment Status -- ' +robj.result.status)
-                
-                deploymentStatus = robj.result.status
-                if(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
-                    sleep 10
-                }*/
-                
-                if(isUnix()){
-                    statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --verbose"
-                }else{
-                    statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --verbose"
+            while(!isDeployProcessDone){
+                if (deploymentStatus.contains(deploySuccessful)){
+                    println('Deployment Succeeded');
+                    isDeployProcessDone = true;
+                } else if (deployUnsuccessful.contains(deployUnsuccessful)){
+                    println('Deployment Did Not Succeed');
+                    println(deploymentStatus);
+                    isDeployProcessDone = true;
+                } else {
+                    println('Deployment In Progress');
+                    println(deploymentStatus);
+                    sleep 5;
+                    if (isUnix()){
+                        deploymentStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                    } else {
+                        deploymentStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                    }
                 }
-                println('statusDep --' +statusDep)
-                deploymentStatus = 'done'
-                if(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
-                    sleep 10
-                }
-            }
+            }            
         }
     }
 }
