@@ -60,7 +60,7 @@ node {
             
             def deploymentStatus = 'Pending'
             while(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
-                if(isUnix()){
+                /*if(isUnix()){
                     statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
                 }else{
                     statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
@@ -72,6 +72,17 @@ node {
                 println('Deployment Status -- ' +robj.result.status)
                 
                 deploymentStatus = robj.result.status
+                if(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
+                    sleep 10
+                }*/
+                
+                if(isUnix()){
+                    statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG}"
+                }else{
+                    statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG}"
+                }
+                println('statusDep --' +statusDep)
+                deploymentStatus = 'done'
                 if(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
                     sleep 10
                 }
