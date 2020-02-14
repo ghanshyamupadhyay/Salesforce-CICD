@@ -58,7 +58,7 @@ node {
                 sourcepush = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }            
             
-            while(${deploymentStatus} == 'Queued' || ${deploymentStatus} == 'InProgress'){
+            while(deploymentStatus == 'Queued' || deploymentStatus == 'InProgress'){
                 println('Checking Deployment Status');
                 if(isUnix()){
                     statusDep = sh returnStdout: true, script: "${deploymentStatusCmd}"
@@ -72,7 +72,7 @@ node {
                 println('Deployment Status -- ' +robj.result.status)
                 
                 deploymentStatus = robj.result.status
-                if(${deploymentStatus} == 'Queued' || ${deploymentStatus} == 'InProgress'){
+                if(deploymentStatus == 'Queued' || deploymentStatus == 'InProgress'){
                     sleep 60
                 }
             }
