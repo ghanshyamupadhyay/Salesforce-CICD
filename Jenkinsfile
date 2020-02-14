@@ -57,7 +57,7 @@ node {
                 println(' Deploy the code into Scratch ORG.')
                 sourcepush = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }            
-            int checkCnt = 3
+            int checkCnt = 5
             //while(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
             while(checkCnt != 0){
                 println('Checking Deployment Status --' +checkCnt);
@@ -78,7 +78,7 @@ node {
                 }
                 */
                 checkCnt = checkCnt - 1
-                sleep 60
+                sleep 20
             }
             
             /*if(isUnix()){
