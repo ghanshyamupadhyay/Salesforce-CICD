@@ -18,8 +18,8 @@ node {
     println ('CONNECTED_APP_CONSUMER_KEY --' +CONNECTED_APP_CONSUMER_KEY)
     
     def toolbelt = tool 'toolbelt'
-    def deploymentStatusCmd = "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-    def deploymentStatus = 'Pending'
+    def deploymentStatusCmd = ""
+    
 
     stage('checkout source code ') {
         checkout scm
@@ -57,85 +57,25 @@ node {
                 println(' Deploy the code into Scratch ORG.')
                 sourcepush = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }            
-            //int checkCnt = 5
-            def statusList    
-            def jsonSlurper = new JsonSlurperClassic()
-            def robj
+            
+            def deploymentStatus = 'Pending'
             while(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
-            //while(checkCnt != 0){
                 if(isUnix()){
-                    statusDep = sh returnStdout: true, script: "${deploymentStatusCmd}"
+                    statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
                 }else{
-                    statusDep = bat returnStdout: true, script: "${deploymentStatusCmd}"
+                    statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
                 }
             
-                statusList = statusDep.split('json')
-                robj = jsonSlurper.parseText(statusList[1])
+                def statusList = statusDep.split('json')
+                def jsonSlurper = new JsonSlurperClassic()
+                def robj = jsonSlurper.parseText(statusList[1])
                 println('Deployment Status -- ' +robj.result.status)
                 
                 deploymentStatus = robj.result.status
                 if(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
                     sleep 10
                 }
-                
-                //checkCnt = checkCnt - 1
-                //sleep 20
-            }
-            
-            /*if(isUnix()){
-                println('Waiting For 60 Seconds')
-                sleep 60
-            }else{
-                println('Waiting For 60 Seconds')
-                sleep 60
-            }
-            
-            if(isUnix()){
-                println('Checking Deployment Status Again ');
-                statusDep1 = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-            }else{
-                println('Checking Deployment Status Again');
-                statusDep1 = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-            }
-            println('Updated Deployment Status')
-            println(statusDep1)*/
-        }
-        /*stage('Import Data to test ORG') {
-            if (isUnix()) {
-                println(' importing data to test org')
-                dataimport = sh returnStdout: true, script: "${toolbelt}/sfdx force:data:tree:import --plan ./data/data-plan.json -u ${HUB_ORG} --json"
-            } else {
-                println(' importing data to test org.')
-                dataimport = bat returnStdout: true, script: "${toolbelt}/sfdx force:data:tree:import --plan ./data/data-plan.json -u ${HUB_ORG} --json"
-            }
-            //println(dataimport)
-            if (dataimport != 0) {
-                println(dataimport)
             }
         }
-        stage('Run Local Test Classes') {
-            if (isUnix()) {
-                testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
-            } else {
-                //testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
-            }
-            //println(testStatus)
-        }
-        stage('Open Target ORG') {
-            if (isUnix()) {
-                openorg = sh returnStdout: true, script: "${toolbelt}/sfdx force:org:open -u ${HUB_ORG} --json" 
-            } else {
-                openorg = bat returnStdout: true, script: "${toolbelt}/sfdx force:org:open -u ${HUB_ORG} --json"
-            }
-            println(openorg)
-        }
-        post {
-            always {
-                rc = sh returnStatus: true, script: "sfdx force:auth:logout -u ${HUB_ORG} -p"
-                if (rc != 0) {
-                        error 'Unable to log out of Production Org'
-                    }               
-            }
-        }*/
     }
 }
