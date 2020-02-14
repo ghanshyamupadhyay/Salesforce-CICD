@@ -58,7 +58,7 @@ node {
             //println(sourcepush)
             
             def deploymentStatus = 'Queued'
-            while(deploymentStatus == 'Queued'){
+            while(deploymentStatus == 'Queued' || deploymentStatus == 'InProgress'){
                 println('Checking Deployment Status');
                 if(isUnix()){
                     statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
@@ -72,7 +72,7 @@ node {
                 def robj = jsonSlurper.parseText(statusList[1])
                 println('robj-- ' +robj)
                 deploymentStatus = robj.result.succes
-                if(deploymentStatus == 'Queued'){
+                if(deploymentStatus == 'Queued' || deploymentStatus == 'InProgress'){
                     println('Waiting For 60 Seconds')
                     sleep 60
                 }
