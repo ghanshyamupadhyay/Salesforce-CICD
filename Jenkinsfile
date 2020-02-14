@@ -19,7 +19,7 @@ node {
     
     def toolbelt = tool 'toolbelt'
     def deploymentStatusCmd = "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-    def deploymentStatus = 'Queued'
+    def deploymentStatus = 'Pending'
 
     stage('checkout source code ') {
         checkout scm
