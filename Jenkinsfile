@@ -18,6 +18,7 @@ node {
     println ('CONNECTED_APP_CONSUMER_KEY --' +CONNECTED_APP_CONSUMER_KEY)
     
     def toolbelt = tool 'toolbelt'
+    def deploymentStatusCmd = "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
 
     stage('checkout source code ') {
         checkout scm
@@ -61,9 +62,9 @@ node {
             while(deploymentStatus == 'Queued' || deploymentStatus == 'InProgress'){
                 println('Checking Deployment Status');
                 if(isUnix()){
-                    statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                    statusDep = sh returnStdout: true, script: "${deploymentStatusCmd}"
                 }else{
-                    statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                    statusDep = bat returnStdout: true, script: "${deploymentStatusCmd}"
                 }
                 println('Deployment Status-- ' +statusDep)
             
@@ -74,7 +75,6 @@ node {
                 println('robj-- ' +robj.result.status)
                 deploymentStatus = robj.result.status
                 if(deploymentStatus == 'Queued' || deploymentStatus == 'InProgress'){
-                    println('Waiting For 60 Seconds')
                     sleep 60
                 }
             }
