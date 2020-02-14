@@ -52,15 +52,28 @@ node {
         stage('Push To Target Org') {
             if(isUnix()){
                 println(' Deploy the code into Scratch ORG.')
-                sourcepush = sh returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
+                deploymentStatus = sh returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }else{
                 println(' Deploy the code into Scratch ORG.')
-                sourcepush = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
+                deploymentStatus = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }            
             
             Boolean isDeployProcessDone = false;
             String deploySuccessful = '"status": "Succeeded"';
             String deployUnsuccessful = '"success": false';
+            
+            String deployQueuedString = 'Status:  Queued';
+            while(deploymentStatus.contains(deployQueuedString)){
+                println('Deployment is queued');
+                sleep 3;
+
+                if (isUnix()){
+                    deploymentStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                } else {
+                    deploymentStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                }
+            }
+
             
             while(!isDeployProcessDone){
                 if (deploymentStatus.contains(deploySuccessful)){
