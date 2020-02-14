@@ -63,7 +63,6 @@ node {
             def robj
             while(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
             //while(checkCnt != 0){
-                println('Checking Deployment Status --' +checkCnt);
                 if(isUnix()){
                     statusDep = sh returnStdout: true, script: "${deploymentStatusCmd}"
                 }else{
