@@ -57,9 +57,12 @@ node {
                 println(' Deploy the code into Scratch ORG.')
                 sourcepush = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }            
-            int checkCnt = 5
-            //while(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
-            while(checkCnt != 0){
+            //int checkCnt = 5
+            def statusList    
+            def jsonSlurper = new JsonSlurperClassic()
+            def robj
+            while(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
+            //while(checkCnt != 0){
                 println('Checking Deployment Status --' +checkCnt);
                 if(isUnix()){
                     statusDep = sh returnStdout: true, script: "${deploymentStatusCmd}"
@@ -67,18 +70,18 @@ node {
                     statusDep = bat returnStdout: true, script: "${deploymentStatusCmd}"
                 }
             
-                /*def statusList = statusDep.split('json')    
-                def jsonSlurper = new JsonSlurperClassic()
-                def robj = jsonSlurper.parseText(statusList[1])
+                statusList = statusDep.split('json')    
+                jsonSlurper = new JsonSlurperClassic()
+                robj = jsonSlurper.parseText(statusList[1])
                 println('Deployment Status -- ' +robj.result.status)
                 
                 deploymentStatus = robj.result.status
                 if(deploymentStatus == 'Pending' || deploymentStatus == 'InProgress'){
-                    sleep 60
+                    sleep 10
                 }
-                */
-                checkCnt = checkCnt - 1
-                sleep 20
+                
+                //checkCnt = checkCnt - 1
+                //sleep 20
             }
             
             /*if(isUnix()){
