@@ -69,8 +69,7 @@ node {
                     statusDep = bat returnStdout: true, script: "${deploymentStatusCmd}"
                 }
             
-                statusList = statusDep.split('json')    
-                jsonSlurper = new JsonSlurperClassic()
+                statusList = statusDep.split('json')
                 robj = jsonSlurper.parseText(statusList[1])
                 println('Deployment Status -- ' +robj.result.status)
                 
