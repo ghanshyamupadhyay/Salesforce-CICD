@@ -83,6 +83,7 @@ node {
                     println('Deployment Did Not Succeed');
                     println(deploymentStatus);
                     isDeployProcessDone = true;
+                    error 'Deployment Did Not Succeed'
                 } else {
                     println('Deployment In Progress');
                     println(deploymentStatus);
