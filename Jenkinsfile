@@ -59,7 +59,7 @@ node {
             }            
             
             Boolean isDeployProcessDone = false;
-            String deploySuccessful = '"status": "Succeeded"';
+            String deploySuccessful = '"status":"Succeeded"';
             String deployUnsuccessful = '"status":"Failed"';
             
             String deployQueuedString = 'Status:  Queued';
@@ -80,13 +80,11 @@ node {
                     println('Deployment Succeeded');
                     isDeployProcessDone = true;
                 } else if (deploymentStatus.contains(deployUnsuccessful)){
-                    println('Deployment Did Not Succeed');
-                    println(deploymentStatus);
+                    println('Deployment Did Not Succeed --' +deploymentStatus);
                     isDeployProcessDone = true;
                     error 'Deployment Did Not Succeed'
                 } else {
-                    println('Deployment In Progress');
-                    println(deploymentStatus);
+                    println('Deployment In Progress --' +deploymentStatus);
                     sleep 5;
                     if (isUnix()){
                         deploymentStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
