@@ -66,7 +66,7 @@ node {
             }
             println('Deployment Status-- ' +statusDep)
             
-            def statusList = testStatus.split('json')    
+            def statusList = statusDep.split('json')    
             println('statusList-- ' +statusList)
             def jsonSlurper = new JsonSlurperClassic()
             def robj = jsonSlurper.parseText(statusList[1])
