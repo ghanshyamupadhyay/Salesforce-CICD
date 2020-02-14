@@ -8,6 +8,5 @@ public with sharing class BoatReviews {
                                            CreatedBy.SmallPhotoUrl,CreatedBy.CompanyName 
                                            from BoatReview__c where Boat__c=:boatId];
  		return boatReviews;
-        adding error
     }
 }
