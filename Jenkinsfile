@@ -55,7 +55,8 @@ node {
                 println(' Deploy the code into Scratch ORG.')
                 sourcepush = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }
-            println(sourcepush)
+            //println(sourcepush)
+            
             if(isUnix()){
                 println('Checking Deployment Status');
                 statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
@@ -63,10 +64,15 @@ node {
                 println('Checking Deployment Status');
                 statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
             }
-            println(' Deployment Status ')
-            println(statusDep)
+            println('Deployment Status-- ' +statusDep)
             
-            if(isUnix()){
+            def statusList = testStatus.split('json')    
+            println('statusList-- ' +statusList)
+            def jsonSlurper = new JsonSlurperClassic()
+            def robj = jsonSlurper.parseText(statusList[1])
+            println('robj-- ' +robj)
+            
+            /*if(isUnix()){
                 println('Waiting For 60 Seconds')
                 sleep 60
             }else{
@@ -82,7 +88,7 @@ node {
                 statusDep1 = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
             }
             println('Updated Deployment Status')
-            println(statusDep1)
+            println(statusDep1)*/
         }
         /*stage('Import Data to test ORG') {
             if (isUnix()) {
