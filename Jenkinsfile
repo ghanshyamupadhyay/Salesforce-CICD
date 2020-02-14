@@ -71,7 +71,8 @@ node {
                 def jsonSlurper = new JsonSlurperClassic()
                 def robj = jsonSlurper.parseText(statusList[1])
                 println('robj-- ' +robj)
-                deploymentStatus = robj.result.succes
+                println('robj-- ' +robj.result.status)
+                deploymentStatus = robj.result.status
                 if(deploymentStatus == 'Queued' || deploymentStatus == 'InProgress'){
                     println('Waiting For 60 Seconds')
                     sleep 60
