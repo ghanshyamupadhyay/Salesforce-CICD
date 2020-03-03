@@ -4,8 +4,8 @@ public class GenerateDataTests {
     
     static void test() {
 		GenerateData.initData();
-        List<Boat__c> boats = [Select id from Boat__c];
+        List<Boat__c> boats = [Select id,name from Boat__c];
         System.assert(boats.size() > 0, 'Boats found');
-        System.assert(boats.size() < 0, 'Boats found');
+        //System.assert(boats.size() < 0, 'Boats found');
     } 
 }

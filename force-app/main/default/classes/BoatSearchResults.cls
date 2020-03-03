@@ -8,7 +8,7 @@ public with sharing class BoatSearchResults {
         } else{
             boats = [select Id,Name,Picture__c,Contact__r.name from Boat__c where BoatType__c = :boatTypeId ];
         }
-        
+        //test code change form automated deployment from jenkins hosted on aws server
         return boats;
     }
 }

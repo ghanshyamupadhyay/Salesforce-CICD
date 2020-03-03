@@ -11,13 +11,12 @@ node {
     def JWT_KEY_CRED_ID = "${params.OPENSSL_KEY}"
     def CONNECTED_APP_CONSUMER_KEY = "${params.CONSUMER_KEY}"
 
-    println 'KEY IS'
     println ('JWT_KEY_CRED_ID --' +JWT_KEY_CRED_ID)
     println ('HUB_ORG --' +HUB_ORG)
     println ('SFDC_HOST --' +SFDC_HOST)
     println ('CONNECTED_APP_CONSUMER_KEY --' +CONNECTED_APP_CONSUMER_KEY)
     
-    def toolbelt = tool 'toolbelt'
+    def toolbelt = tool 'toolbelt'    
 
     stage('checkout source code ') {
         checkout scm
@@ -50,76 +49,47 @@ node {
         stage('Push To Target Org') {
             if(isUnix()){
                 println(' Deploy the code into Scratch ORG.')
-                sourcepush = sh returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
+                deploymentStatus = sh returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }else{
                 println(' Deploy the code into Scratch ORG.')
-                sourcepush = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
-            }
-            println(sourcepush)
-            if(isUnix()){
-                println('Checking Deployment Status');
-                statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-            }else{
-                println('Checking Deployment Status');
-                statusDep = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-            }
-            println(' Deployment Status ')
-            println(statusDep)
+                deploymentStatus = bat returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
+            }            
             
-            if(isUnix()){
-                println('Waiting For 60 Seconds')
-                sleep 60
-            }else{
-                println('Waiting For 60 Seconds')
-                sleep 60
-            }
+            Boolean isDeployProcessDone = false;
+            String deploySuccessful = '"status":"Succeeded"';
+            String deployUnsuccessful = '"status":"Failed"';
             
-            if(isUnix()){
-                println('Checking Deployment Status Again ');
-                statusDep1 = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
-            }else{
-                println('Checking Deployment Status Again');
-                statusDep1 = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+            String deployQueuedString = 'Status:  Queued';
+            while(deploymentStatus.contains(deployQueuedString)){
+                println('Deployment is queued');
+                sleep 3;
+
+                if (isUnix()){
+                    deploymentStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                } else {
+                    deploymentStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                }
             }
-            println('Updated Deployment Status')
-            println(statusDep1)
+
+            
+            while(!isDeployProcessDone){
+                if (deploymentStatus.contains(deploySuccessful)){
+                    println('Deployment Succeeded');
+                    isDeployProcessDone = true;
+                } else if (deploymentStatus.contains(deployUnsuccessful)){
+                    println('Deployment Did Not Succeed --' +deploymentStatus);
+                    isDeployProcessDone = true;
+                    error 'Deployment Did Not Succeed'
+                } else {
+                    println('Deployment In Progress --' +deploymentStatus);
+                    sleep 5;
+                    if (isUnix()){
+                        deploymentStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                    } else {
+                        deploymentStatus = bat returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                    }
+                }
+            }            
         }
-        /*stage('Import Data to test ORG') {
-            if (isUnix()) {
-                println(' importing data to test org')
-                dataimport = sh returnStdout: true, script: "${toolbelt}/sfdx force:data:tree:import --plan ./data/data-plan.json -u ${HUB_ORG} --json"
-            } else {
-                println(' importing data to test org.')
-                dataimport = bat returnStdout: true, script: "${toolbelt}/sfdx force:data:tree:import --plan ./data/data-plan.json -u ${HUB_ORG} --json"
-            }
-            //println(dataimport)
-            if (dataimport != 0) {
-                println(dataimport)
-            }
-        }
-        stage('Run Local Test Classes') {
-            if (isUnix()) {
-                testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
-            } else {
-                //testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
-            }
-            //println(testStatus)
-        }
-        stage('Open Target ORG') {
-            if (isUnix()) {
-                openorg = sh returnStdout: true, script: "${toolbelt}/sfdx force:org:open -u ${HUB_ORG} --json" 
-            } else {
-                openorg = bat returnStdout: true, script: "${toolbelt}/sfdx force:org:open -u ${HUB_ORG} --json"
-            }
-            println(openorg)
-        }
-        post {
-            always {
-                rc = sh returnStatus: true, script: "sfdx force:auth:logout -u ${HUB_ORG} -p"
-                if (rc != 0) {
-                        error 'Unable to log out of Production Org'
-                    }               
-            }
-        }*/
     }
 }
