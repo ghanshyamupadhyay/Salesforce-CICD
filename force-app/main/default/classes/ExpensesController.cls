@@ -1,4 +1,6 @@
 public with sharing class ExpensesController {
+
+    //The method is called from lighting compoenent to get list of all expenses
     @AuraEnabled
     public static list<Expense__c> getExpenses(){
         return[SELECT id, name, Amount__c, Client__c, Date__c, Reimbursed__c, CreatedDate, 
