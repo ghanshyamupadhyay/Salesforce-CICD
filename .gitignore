@@ -331,3 +331,6 @@ ASALocalRun/
 
 # sfdx config folder
 .sfdx/
+.sfdx/typings/
+.sfdx/tools/
+.sfdx/typings/apex/
