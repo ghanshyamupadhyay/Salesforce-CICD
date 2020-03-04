@@ -10,7 +10,7 @@ global with sharing class ae_PACSurveyCtlr{
     
      public void selectedParisvalue(){
         string selectID = Apexpages.currentPage().getParameters().get('idVal');
-        system.debug('debug from shyam dev1');
+        system.debug('debug from vs code in dev1');
         if(selectID != null){ 
             selectedparisName = selectID;
         }
