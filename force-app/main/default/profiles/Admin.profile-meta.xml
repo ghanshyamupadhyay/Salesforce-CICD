@@ -7,4 +7,10 @@
         <hidden>false</hidden>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <field>Expense__c.Long_Description__c</field>
+        <editable>true</editable>
+        <hidden>false</hidden>
+        <readable>true</readable>
+    </fieldPermissions>
 </Profile>
