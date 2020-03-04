@@ -3,6 +3,7 @@
     <fullName>Long_Description__c</fullName>
     <description>This field is created to hold detailed description of expense</description>
     <externalId>false</externalId>
+    <inlineHelpText>Provide More details here!</inlineHelpText>
     <label>Long Description</label>
     <length>32768</length>
     <trackTrending>false</trackTrending>
