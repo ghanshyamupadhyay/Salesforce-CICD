@@ -7,6 +7,7 @@ public with sharing class BoatReviews {
                                            CreatedDate,CreatedBy.Name,CreatedBy.Id,
                                            CreatedBy.SmallPhotoUrl,CreatedBy.CompanyName 
                                            from BoatReview__c where Boat__c=:boatId];
+        //COmment added
  		return boatReviews;
     }
 }
