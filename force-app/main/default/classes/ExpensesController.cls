@@ -2,7 +2,7 @@ public with sharing class ExpensesController {
     @AuraEnabled
     public static list<Expense__c> getExpenses(){
         return[SELECT id, name, Amount__c, Client__c, Date__c, Reimbursed__c, CreatedDate, 
-                    Short_Description__c, Long_Description__c, Expense_Type__c, Employee_ID__c
+                    Short_Description__c, Long_Description__c, Expense_Type__c, Employee_ID__c, WBS_COde__c
                 FROM Expense__c];
     }
     
