@@ -4,6 +4,5 @@ public with sharing class BoatSearchFormController
     public static List<BoatType__c> getBoatTypes()
     {
         return [SELECT Id, Name from BoatType__c ORDER BY Name];
-        //testing build from server
     }
 }
