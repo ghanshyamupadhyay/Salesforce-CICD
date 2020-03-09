@@ -4,10 +4,8 @@ public with sharing class BoatReviews {
     public static List<BoatReview__c> getAll (String boatId ) {
         
         List<BoatReview__c> boatReviews = [select Id,Name,Comment__c,Rating__c,LastModifiedDate,
-                                           CreatedDate,CreatedBy.Name,CreatedBy.Id,
-                                           CreatedBy.SmallPhotoUrl,CreatedBy.CompanyName 
+                                           CreatedDate,CreatedBy.Name,CreatedBy.Id,CreatedBy.SmallPhotoUrl,CreatedBy.CompanyName 
                                            from BoatReview__c where Boat__c=:boatId];
-        //COmment added
  		return boatReviews;
     }
 }
