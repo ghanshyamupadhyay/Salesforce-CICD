@@ -3,6 +3,11 @@ How to use Salesforce DX with Jenkins to implement Continuous deployment and Con
 # Scope: - 
 Scope of the document is to provide the step by step solution to implement the SFDX with jenkins Server so that project can take the advantage of SFDX continuous delivery and development capabilities including the source control management.
 
+<a href="https://githubsfdeploy.herokuapp.com?owner=ghanshyamupadhay&repo=salesforce-cicd&ref=master">
+  <img alt="Deploy to Salesforce"
+       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
+</a>
+
 # Content
 1. Download, install the OpenSSL in your Machine and configure the path of Open SSL
 2. Generate Private Key
